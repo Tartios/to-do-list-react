@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function ToDo(props) {
+export default function ToDo({id, value, toDo, handleClickComplete}) {
     function onComplete () {
-        props.onComplete()
+        handleClickComplete(toDo);
     };
     return (        
-        <div className="card">
-            <p className="card__text">{props.value}</p>
+        <div className="card" id={id}>
+            <p className="card__text">{value}</p>
             <button className="card__complete-button" onClick={onComplete}>Завершить</button>
         </div>
     );

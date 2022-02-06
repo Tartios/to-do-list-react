@@ -15,9 +15,9 @@ export default function Form(props) {
   };
   
     return (
-        <form action='#'>
-            <input type="text" onChange={handleInputValue} className="input" value={inputValue} />
-            <button className={props.className} type="submit" onClick={handleSubmit} >{props.bntValue}</button>
+        <form action='#' className='service'>
+            <input type="text" onChange={handleInputValue} className="serviсe__input" value={inputValue} />
+            <button className="service__button" type="submit" onClick={handleSubmit} >{props.bntValue}</button>
         </form>
     )
 }

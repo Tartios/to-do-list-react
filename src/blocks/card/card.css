@@ -1,0 +1,17 @@
+@import url(./__change-button/card__change-button.css);
+@import url(./__complete-button/card__complete-button.css);
+@import url(./__delete-button/card__delete-button.css);
+@import url(./__text/card__text.css);
+
+.card {
+    width: 80%;
+    margin: 5px auto;
+    background-color: #fff;
+    /* background-color: #b89c9c; */
+    border: 2px solid #0000ff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+}

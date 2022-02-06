@@ -17,14 +17,15 @@ function App() {
     const newToDo = {id, value: toDo};
     setToDo([...toDos, newToDo]);
   }
-  // useEffect(() => {
-
-  // })
+  
+  const handleClickComplete = (toDo) => {
+    setToDo(toDos.filter(item => item.id !==toDo.id))
+  }
 
   return (
-    <div className="App">      
+    <div className="main">      
       <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
-      <ToDoList toDos={toDos} />
+      <ToDoList toDos={toDos} handleClickComplete={handleClickComplete} />
     </div>
   );
 }
