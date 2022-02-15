@@ -2,24 +2,37 @@ import '../App.css';
 import React, {useState, useEffect} from 'react';
 import Form from './Form';
 import ToDoList from './ToDoList';
+import Api from '../utils/Api';
+
+const api = new Api('http://localhost:3000')
 
 function App() {
   // ========== TO DO ========== //
-  const [toDos, setToDo] = useState([
-    {id: 1, value: "Привет"},
-    {id: 2, value: "Я"},
-    {id: 3, value: "Работаю"},
-  ]);
+  const [toDos, setToDo] = useState([]);
+
+  useEffect(() => {
+    api.getToDo()
+    .then(res => {
+      setToDo(res.data);
+    })
+  }, []);
 
   const handleNewToDo = (toDo) => {
-    const id = Date.now();
-    const newToDo = {id, value: toDo};
-    setToDo([...toDos, newToDo]);
-  }
+    api.postToDo(toDo)
+    .then(res => {
+      setToDo([...toDos, res])
+    })
+  };
   
   const handleClickComplete = (toDo) => {
-    setToDo(toDos.filter(item => item.id !==toDo.id))
-  }
+    console.log(toDo._id);
+    api.deleteToDo(toDo._id)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err));
+    setToDo(toDos.filter(item => item._id !==toDo._id));
+  };
 
   return (
     <div className="main">      

@@ -42,7 +42,8 @@ module.exports.patchToDo = (req, res) => {
 }
 
 module.exports.deleteToDo = (req, res) => {
-    toDoModel.findByIdAndDelete(req.params.id)
+    const { id } = req.params;
+    toDoModel.findByIdAndDelete({ id })
     .then(ToDo => res.send({ data: ToDo }))
     .catch(err => res.status(500).send({ message: `message: 'Произошла ошибка'` }));
 }
