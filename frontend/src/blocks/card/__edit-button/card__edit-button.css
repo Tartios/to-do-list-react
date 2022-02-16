@@ -1,5 +1,5 @@
-.card__complete-button {
-    background-image: url(../../../img/complete.png);
+.card__edit-button {
+    background-image: url(../../../img/edit.png);
     width: 35px;
     height: 35px;
     background-position: center;

@@ -25,19 +25,23 @@ function App() {
   };
   
   const handleClickComplete = (toDo) => {
-    console.log(toDo._id);
     api.deleteToDo(toDo._id)
     .then(res => {
-      console.log(res);
+      setToDo(toDos.filter(item => item._id !== toDo._id));
     })
     .catch(err => console.log(err));
-    setToDo(toDos.filter(item => item._id !==toDo._id));
   };
+
+  const handleClickChangeToDo = (toDo) => {
+    api.putToDo(toDo)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
 
   return (
     <div className="main">      
       <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
-      <ToDoList toDos={toDos} handleClickComplete={handleClickComplete} />
+      <ToDoList toDos={toDos} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} />
     </div>
   );
 }

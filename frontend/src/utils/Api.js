@@ -22,7 +22,6 @@ export default class Api {
     }
 
     postToDo(data) {
-        console.log(this.url);
         return fetch(`${this.url}/`, {
             method: 'POST',
             headers: {
@@ -65,10 +64,7 @@ export default class Api {
             })
         })
         .then(res => {
-            console.log(res);
-            res.json()})
-        .then((data) => {
-            console.log(data);
+            res.json();
         })
         .catch(err => console.log(err))
     }

@@ -1,7 +1,8 @@
-@import url(./__change-button/card__change-button.css);
+@import url(./__edit-button/card__edit-button.css);
 @import url(./__complete-button/card__complete-button.css);
 @import url(./__delete-button/card__delete-button.css);
 @import url(./__text/card__text.css);
+@import url(./__buttons/card__buttons.css);
 
 .card {
     width: 80%;
