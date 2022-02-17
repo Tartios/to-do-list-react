@@ -34,7 +34,17 @@ function App() {
 
   const handleClickChangeToDo = (toDo) => {
     api.putToDo(toDo)
-    .then(res => console.log(res))
+    .then(res => {
+      // const newToDos = toDos.map(item => {
+      //   if(item._id === res._id) {
+      //     item.toDo = res.toDo;
+      //     return toDos;
+      //   }
+      //   continue;
+      // });
+      // console.log(newToDos);
+      // setToDo([newToDos]);
+    })
     .catch(err => console.log(err));
   }
 

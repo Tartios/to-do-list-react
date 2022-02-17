@@ -36,21 +36,22 @@ export default class Api {
         .catch(err => console.log(err));
     }
 
-    putToDo(toDoId) {
-        return fetch(`${this.url}/${toDoId}`, {
+    putToDo(toDo) {
+        console.log(toDo);
+        return fetch(`${this.url}/${toDo._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: toDoId,
+                toDo: toDo,
             })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data);
-            })
-            .catch(err => console.log(err))
         })
+            .then(res => res.json())
+            // .then((data) => {
+            //     console.log(data);
+            // })
+            .catch(err => console.log(err))
     }
 
     deleteToDo(toDoId) {

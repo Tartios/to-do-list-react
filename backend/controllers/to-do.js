@@ -32,7 +32,7 @@ module.exports.findToDo = (req, res) => {
 }
 
 module.exports.patchToDo = (req, res) => {
-    toDoModel.findByIdAndUpdate(req.params.id, req.body, {
+    toDoModel.findByIdAndUpdate(req.params.id, req.body.toDo, {
         new: true,
         runValidators: true,
         upsert: false,

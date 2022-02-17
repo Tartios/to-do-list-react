@@ -1,0 +1,9 @@
+.card__edit-block {
+    width: 80%;
+    height: 100%;
+    display: none;
+}
+
+.card__edit-block_active {
+    display: block;
+}
