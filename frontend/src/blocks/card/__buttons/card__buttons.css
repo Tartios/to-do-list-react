@@ -1,6 +1,6 @@
 .card__buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
     padding: 5px 0;
 }

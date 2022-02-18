@@ -27,6 +27,7 @@ export default function ToDo({id, value, toDo, handleClickComplete, handleClickC
         const text = e.target.closest('.card').querySelector('.card__text');
         input.classList.remove('card__edit-block_active');
         text.classList.remove('card__text_inactive');
+        text.textContent = inputValue;
     }
     return (        
         <div className="card" id={id}>
@@ -37,8 +38,8 @@ export default function ToDo({id, value, toDo, handleClickComplete, handleClickC
                 <button className="card__edit-submit" onClick={onEditSubmit}>ок</button>
             </div>
             <div className='card__buttons'>
-                <button className="card__edit-button" onClick={onEdit}></button>
-                <button className="card__complete-button" onClick={onComplete}></button>
+                <button title="Отредактировать" className="card__edit-button" onClick={onEdit}></button>
+                <button title="Завершить" className="card__complete-button" onClick={onComplete}></button>
             </div>
         </div>
     );
