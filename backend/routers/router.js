@@ -5,12 +5,15 @@ const {
     createToDo,
     findToDo,
     patchToDo,
-    deleteToDo } = require('../controllers/to-do');
+    deleteToDo, 
+    completeToDo
+} = require('../controllers/to-do');
 
 router.get('/', getToDoList);
 router.post('/', createToDo);
 router.get('/:id', findToDo);
 router.put('/:id', patchToDo);
+router.put('/completed/:id', completeToDo)
 router.delete('/:id', deleteToDo);
 
 // const resik = (req, res) => {

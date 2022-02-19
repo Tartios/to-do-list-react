@@ -1,0 +1,5 @@
+.card__delete-button {
+    position: absolute;
+    right: -42px;
+    top: 3px;
+}

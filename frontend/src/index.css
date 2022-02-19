@@ -3,6 +3,7 @@
 @import url(./blocks/service/service.css);
 @import url(./blocks/to-do-list/to-do-list.css);
 @import url(./blocks/card/card.css);
+@import url(./blocks/nav/nav.css);
 
 body {
   margin: 0;

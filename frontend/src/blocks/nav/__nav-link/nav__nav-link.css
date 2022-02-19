@@ -1,0 +1,14 @@
+.nav__nav-link {
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+}
+
+.nav__nav-link:first-child {
+    border-top-left-radius: 10px;
+}
+
+.nav__nav-link:last-child {
+    border-top-right-radius: 10px;
+}

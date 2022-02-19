@@ -1,7 +1,10 @@
 import '../App.css';
 import React, {useState, useEffect} from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Header from './Header'
 import Form from './Form';
 import ToDoList from './ToDoList';
+import CompletedList from './CompletedList'
 import Api from '../utils/Api';
 
 const api = new Api('http://localhost:3000')
@@ -24,7 +27,7 @@ function App() {
     })
   };
   
-  const handleClickComplete = (toDo) => {
+  const handleClickDelete = (toDo) => {
     api.deleteToDo(toDo._id)
     .then(res => {
       setToDo(toDos.filter(item => item._id !== toDo._id));
@@ -33,13 +36,32 @@ function App() {
   };
 
   const handleClickChangeToDo = (toDo) => {
-    api.putToDo(toDo);
+    api.putToDo(toDo)
+  }
+
+  const handleClickComplete = toDo => {
+    console.log(toDo);
+    toDo.completed = true;
+    console.log(toDo);
+    api.completeToDo(toDo)
+    .then(res => {
+      setToDo(toDos.filter(item => item._id !== toDo._id));
+    })
+    .catch(err => console.log(err));
   }
 
   return (
-    <div className="main">      
+    <div className="main">
+      <Header />
       <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
-      <ToDoList toDos={toDos} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} />
+      <Switch>
+        <Route path="/completed">
+          <CompletedList toDos={toDos} handleClickDelete={handleClickDelete} />
+        </Route>
+        <Route path="/">
+          <ToDoList toDos={toDos} handleClickDelete={handleClickDelete} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} />
+        </Route>
+      </Switch>
     </div>
   );
 }

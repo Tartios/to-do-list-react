@@ -1,0 +1,8 @@
+@import url(./__nav-link/nav__nav-link.css);
+@import url(./__nav-link/_active/nav__nav-link_active.css);
+
+.nav {
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+}

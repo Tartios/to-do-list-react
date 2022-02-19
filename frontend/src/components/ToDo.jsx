@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export default function ToDo({id, value, toDo, handleClickComplete, handleClickChangeToDo}) {
+export default function ToDo({id, value, toDo, handleClickDelete, handleClickComplete, handleClickChangeToDo}) {
 
     const [inputValue, setInputValue] = useState(value);
 
@@ -11,6 +11,11 @@ export default function ToDo({id, value, toDo, handleClickComplete, handleClickC
     function onComplete () {
         handleClickComplete(toDo);
     };
+    
+    function onDelete() {
+        handleClickDelete(toDo);
+    };
+
     function onEdit (e) {
         const input = e.target.closest('.card').querySelector('.card__edit-block');
         const text = e.target.closest('.card').querySelector('.card__text');
@@ -20,7 +25,7 @@ export default function ToDo({id, value, toDo, handleClickComplete, handleClickC
     };
 
     function onEditSubmit (e) {
-        const newToDo = toDo;;
+        const newToDo = toDo;
         newToDo.toDo = inputValue;
         handleClickChangeToDo(newToDo);
         const input = e.target.closest('.card').querySelector('.card__edit-block');
@@ -39,6 +44,7 @@ export default function ToDo({id, value, toDo, handleClickComplete, handleClickC
             </div>
             <div className='card__buttons'>
                 <button title="Отредактировать" className="card__edit-button" onClick={onEdit}></button>
+                <button title="Удалить" className="card__delete-button" onClick={onDelete}>X</button>
                 <button title="Завершить" className="card__complete-button" onClick={onComplete}></button>
             </div>
         </div>

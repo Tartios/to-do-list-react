@@ -41,6 +41,16 @@ module.exports.patchToDo = (req, res) => {
     .catch(err => res.status(500).send({ message: `message: 'Произошла ошибка'` }));
 }
 
+module.exports.completeToDo = (req, res) => {
+    toDoModel.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        upsert: false,
+    })
+    .then(ToDo => res.send({ data: ToDo }))
+    .catch(err => res.status(500).send({ message: `message: 'Произошла ошибка'` }));
+}
+
 module.exports.deleteToDo = (req, res) => {
     toDoModel.findByIdAndDelete(req.params.id)
     .then(ToDo => res.send({ data: ToDo }))

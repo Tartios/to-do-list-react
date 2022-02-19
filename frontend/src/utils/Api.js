@@ -37,7 +37,6 @@ export default class Api {
     }
 
     putToDo(toDo) {
-        console.log(toDo);
         return fetch(`${this.url}/${toDo._id}`, {
             method: 'PUT',
             headers: {
@@ -51,6 +50,20 @@ export default class Api {
             // .then((data) => {
             //     console.log(data);
             // })
+            .catch(err => console.log(err))
+    }
+    
+    completeToDo(toDo) {
+        return fetch(`${this.url}/completed/${toDo._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                completed: true,
+            })
+        })
+            .then(res => res.json())
             .catch(err => console.log(err))
     }
 
