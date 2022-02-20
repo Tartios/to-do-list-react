@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import BtnDeleteToDo from './buttons/BtnDeleteToDo';
+import BtnCompleteToDo from './buttons/BtnCompleteToDo';
+import BtnEditToDo from './buttons/BtnEditToDo';
+import BtnEditToDoHandleSubmit from './buttons/BtnEditToDoHandleSubmit';
 
 export default function ToDo({id, value, toDo, handleClickDelete, handleClickComplete, handleClickChangeToDo}) {
 
@@ -21,7 +25,6 @@ export default function ToDo({id, value, toDo, handleClickDelete, handleClickCom
         const text = e.target.closest('.card').querySelector('.card__text');
         input.classList.add('card__edit-block_active');
         text.classList.add('card__text_inactive');
-        // handleClickChangeToDo(toDo);
     };
 
     function onEditSubmit (e) {
@@ -34,18 +37,19 @@ export default function ToDo({id, value, toDo, handleClickDelete, handleClickCom
         text.classList.remove('card__text_inactive');
         text.textContent = inputValue;
     }
+
     return (        
-        <div className="card" id={id}>
+        <div className="card" id={id} draggable="true">
             <p className="card__text">{value}
             </p>
             <div className="card__edit-block">
                 <input className="card__edit-todo" type="text" onChange={handleInputValue} value={inputValue} />
-                <button className="card__edit-submit" onClick={onEditSubmit}>ок</button>
+                <BtnEditToDoHandleSubmit onEditSubmit={onEditSubmit} value={"ок"} />
             </div>
-            <div className='card__buttons'>
-                <button title="Отредактировать" className="card__edit-button" onClick={onEdit}></button>
-                <button title="Удалить" className="card__delete-button" onClick={onDelete}>X</button>
-                <button title="Завершить" className="card__complete-button" onClick={onComplete}></button>
+            <div className="card__buttons">
+                { toDo.completed === false ? <BtnEditToDo onEdit={onEdit} /> : null}
+                <BtnDeleteToDo onDelete={onDelete} style={ toDo.completed === false ? "card__delete-button" : null} value="X" />
+                { toDo.completed === false ? <BtnCompleteToDo onComplete={onComplete} /> : null}
             </div>
         </div>
     );

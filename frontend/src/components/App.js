@@ -20,6 +20,13 @@ function App() {
     })
   }, []);
 
+  const [completeList, setCompleteList] = useState([]);
+
+  useEffect(() => {
+    api.getToDo()
+    .then(res => setCompleteList(res.data))
+  }, []);
+
   const handleNewToDo = (toDo) => {
     api.postToDo(toDo)
     .then(res => {
@@ -31,6 +38,7 @@ function App() {
     api.deleteToDo(toDo._id)
     .then(res => {
       setToDo(toDos.filter(item => item._id !== toDo._id));
+      setCompleteList(toDos.filter(item => item._id !== toDo._id));
     })
     .catch(err => console.log(err));
   };
@@ -40,12 +48,11 @@ function App() {
   }
 
   const handleClickComplete = toDo => {
-    console.log(toDo);
     toDo.completed = true;
-    console.log(toDo);
     api.completeToDo(toDo)
     .then(res => {
       setToDo(toDos.filter(item => item._id !== toDo._id));
+      setCompleteList(toDos);
     })
     .catch(err => console.log(err));
   }
@@ -56,7 +63,7 @@ function App() {
       <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
       <Switch>
         <Route path="/completed">
-          <CompletedList toDos={toDos} handleClickDelete={handleClickDelete} />
+          <CompletedList toDos={completeList} handleClickDelete={handleClickDelete} />
         </Route>
         <Route path="/">
           <ToDoList toDos={toDos} handleClickDelete={handleClickDelete} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} />
