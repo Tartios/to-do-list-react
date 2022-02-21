@@ -1,10 +1,13 @@
 import '../App.css';
-import React, {useState, useEffect} from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from './Header'
 import Form from './Form';
 import ToDoList from './ToDoList';
-import CompletedList from './CompletedList'
+import CompletedList from './CompletedList';
+import SignIn from './auth/Signin';
+import SignUp from './auth/Signup';
+import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
 
 const api = new Api('http://localhost:3000')
@@ -57,16 +60,45 @@ function App() {
     .catch(err => console.log(err));
   }
 
+  // =============== AUTH ===============
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="main">
       <Header />
       <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
       <Switch>
-        <Route path="/completed">
-          <CompletedList toDos={completeList} handleClickDelete={handleClickDelete} />
+        <ProtectedRoute
+          path="/completed"
+          loggedIn={loggedIn}
+          component={CompletedList}
+          toDos={completeList}
+          handleClickDelete={handleClickDelete}
+        />
+        <ProtectedRoute
+          path="/"
+          exact
+          loggedIn={loggedIn}
+          component={ToDoList}
+          toDos={toDos}
+          handleClickDelete={handleClickDelete}
+          handleClickComplete={handleClickComplete}
+          handleClickChangeToDo={handleClickChangeToDo}
+        />
+        <Route path="/signin">
+          <SignIn />
         </Route>
-        <Route path="/">
-          <ToDoList toDos={toDos} handleClickDelete={handleClickDelete} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} />
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route>
+          {/* <CompletedList toDos={completeList} handleClickDelete={handleClickDelete} /> */}
+          {loggedIn ? <Redirect to="/completed" /> : <Redirect to="/signin" />}
+        </Route>
+        <Route>
+          {/* <ToDoList toDos={toDos} handleClickDelete={handleClickDelete} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} /> */}
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
         </Route>
       </Switch>
     </div>

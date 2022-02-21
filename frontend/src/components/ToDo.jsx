@@ -38,8 +38,36 @@ export default function ToDo({id, value, toDo, handleClickDelete, handleClickCom
         text.textContent = inputValue;
     }
 
+    // function handleDragStart (e, toDo) {
+    //     console.log('drag-start');
+    // }
+
+    // function handleDragEnd (e) {
+
+    // }
+
+    // function handleDragOver(e) {
+    //     e.preventDefault();
+
+    // }
+
+    // function handleDragDrop (e) {
+    //     e.preventDefault();
+    //     console.log('drop');
+
+    // }
+
     return (        
-        <div className="card" id={id} draggable="true">
+        <div
+        className="card"
+        id={id}
+        // draggable="true"
+        // onDragStart={handleDragStart(e, toDo)}
+        // onDragLeave={handleDragEnd(e)}
+        // onDragEnd={handleDragEnd(e)}
+        // onDragOver={handleDragOver(e)}
+        // onDrop={handleDragDrop(e, toDo)}
+        >
             <p className="card__text">{value}
             </p>
             <div className="card__edit-block">
