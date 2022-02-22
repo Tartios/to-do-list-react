@@ -2,7 +2,6 @@ import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from './Header'
-import Form from './Form';
 import ToDoList from './ToDoList';
 import CompletedList from './CompletedList';
 import SignIn from './auth/Signin';
@@ -62,12 +61,13 @@ function App() {
 
   // =============== AUTH ===============
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
+
+  
   return (
     <div className="main">
       <Header />
-      <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />
       <Switch>
         <ProtectedRoute
           path="/completed"
@@ -85,6 +85,7 @@ function App() {
           handleClickDelete={handleClickDelete}
           handleClickComplete={handleClickComplete}
           handleClickChangeToDo={handleClickChangeToDo}
+          handleNewToDo={handleNewToDo}
         />
         <Route path="/signin">
           <SignIn />
