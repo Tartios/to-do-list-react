@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// import { auth } from "./Auth";
 
 export default function SignIn () {
 
@@ -20,6 +21,13 @@ export default function SignIn () {
         const { userName, password } = data;
         // handleSignIn(userName, password);
     }
+
+    // auth(data.userName, data.password)
+    // .then(data => {
+    //     if(data.jwt) {
+    //         setState
+    //     }
+    // })
 
     return (
         <div>

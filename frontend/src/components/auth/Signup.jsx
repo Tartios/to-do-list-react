@@ -8,10 +8,10 @@ export default function SignUp () {
     });
 
     const handleChange = (e) => {
-        const { userName, value } = e.target;
+        const { name, value } = e.target;//было userName
         setData({
             ...data,
-            [userName]: value,
+            [name]: value,
         });
     };
 

@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header'
 import ToDoList from './ToDoList';
 import CompletedList from './CompletedList';
@@ -8,10 +8,37 @@ import SignIn from './auth/Signin';
 import SignUp from './auth/Signup';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
+import { auth, getContent, register } from './auth/Auth';
+// import { UserContext } from './AppContext';
 
 const api = new Api('http://localhost:3000')
 
 function App() {
+
+
+const tokenCheck = () => {
+  if(localStorage.getItem("jwt")) {
+    const jwt = localStorage.getItem("jwt");
+    getContent(jwt)
+    .then((res) => {
+      if(res) {
+        const userData = {
+          userName: res.userName,
+          email: res.email,
+        }
+        setUserData(userData);
+        setLoggedIn(true);
+        // history.push("/");
+      }
+    })
+  }
+};
+
+
+  // ========== USER ========== //
+
+  const [userData, setUserData] = useState({});
+
   // ========== TO DO ========== //
   const [toDos, setToDo] = useState([]);
 
@@ -63,10 +90,45 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(true);
 
+  const handleSignIn = (userName, password) => {
+    auth(userName, password)
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem("jwt", data.token);
+        setUserData({
+          userName: data.UserName,
+          password: data.password,
+        })
+        .catch(err => console.log(err));
+        setLoggedIn(true);
+        // history.push("/");
+      }
+    })
+  };
 
-  
+  // const history = useHistory();
+  const handleSignUp = (userName, email, password) => {
+    register(userName, email, password)
+    .then((data) => {
+      setUserData({
+        userName: data.userName,
+        email: data.email,
+        password: data.password,
+      })
+      .catch(err => console.log(err));
+      setLoggedIn(true);
+      // history.push("/");
+    })
+  };
+
+  const signOut = () => {
+    localStorage.removeItem("jwt");
+    // history.push("/signin");
+  };
+
   return (
     <div className="main">
+      {/* <UserContext.Provider value={userData}> */}
       <Header />
       <Switch>
         <ProtectedRoute
@@ -102,6 +164,7 @@ function App() {
           {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
         </Route>
       </Switch>
+      {/* </UserContext.Provider> */}
     </div>
   );
 }
