@@ -88,7 +88,7 @@ const tokenCheck = () => {
 
   // =============== AUTH ===============
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSignIn = (userName, password) => {
     auth(userName, password)
@@ -150,10 +150,10 @@ const tokenCheck = () => {
           handleNewToDo={handleNewToDo}
         />
         <Route path="/signin">
-          <SignIn />
+          <SignIn handleSignIn={handleSignIn} />
         </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp handleSignUp={handleSignUp} />
         </Route>
         <Route>
           {/* <CompletedList toDos={completeList} handleClickDelete={handleClickDelete} /> */}

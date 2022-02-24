@@ -5,6 +5,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
+const { createUser, signIn } = require('./controllers/users');
+const auth = require('./middlewares/auth');
 
 mongoose.connect('mongodb://localhost:27017/to-do');
 
@@ -19,6 +21,9 @@ app.use(cors());
 //     next();
 // }
 // app.use(logger);
+app.post('/signup', createUser);
+app.post('/signin', signIn);
+app.use(auth);
 app.use('/', router);
 app.listen(PORT, () => {
     console.log(`Listen ${PORT}`);

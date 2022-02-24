@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SignUp () {
+export default function SignUp ({ handleSignUp }) {
     const [data, setData] = useState({
        userName: "",
        email: "",
@@ -9,6 +9,7 @@ export default function SignUp () {
 
     const handleChange = (e) => {
         const { name, value } = e.target;//было userName
+        console.log(e.target.name);
         setData({
             ...data,
             [name]: value,
@@ -18,7 +19,7 @@ export default function SignUp () {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { userName, email, password } = data;
-        // handleSignUp(userName, email, password);
+        handleSignUp(userName, email, password);
     };
 
     return (
@@ -27,11 +28,11 @@ export default function SignUp () {
             <h2>Зарегистрируйтесь чтобы воспользоваться приложением</h2>
             <form action="#" onSubmit={handleSubmit}>
                 <label htmlFor="userName">Логин</label>
-                <input type="text" id="userName" onChange={handleChange} />
+                <input type="text" id="userName" name="userName" onChange={handleChange} />
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" onChange={handleChange} />
+                <input type="email" id="email" name="email" onChange={handleChange} />
                 <label htmlFor="password">Пароль</label>
-                <input type="text" id="password" onChange={handleChange} />
+                <input type="password" id="password" name="password" onChange={handleChange} />
                 <button>Зарегистрироваться</button>
             </form>
         </div>

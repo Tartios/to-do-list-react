@@ -8,14 +8,8 @@ module.exports.getToDoList = (req, res) => {
 }
 
 module.exports.createToDo = (req, res) => {
-    // const { ToDo } = req.body;
-    // console.log(req.body);
-    const toDo = req.body.toDo;
     const data = req.body;
-    // console.log(toDo);
-    // console.log(req.body);
-    // ToDo.create({ ToDo })
-    toDoModel.create({toDo: data.toDo, creator: data.creator})
+    toDoModel.create({ toDo: data.toDo, creator: req.user._id })
         .then((card) => {
             res.send(card);
     })
