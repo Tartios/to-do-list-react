@@ -2,7 +2,7 @@ export const BASE_URL = 'http://localhost:3000'
 //мне наверно не нужен для этого отдельный компонент, возможно стоит перенести в api
 //и еще useHistory тут нужно сделать, урок регистрации в реакте
 export const register = (userName, email, password) => {
-    return fetch(`${BASE_URL}/signin`, {
+    return fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -35,9 +35,10 @@ export const auth = (userName, password) => {
     })
     .then(res => res.json())
     .then((data) => {
-        if(data.jwt) {
-            localStorage.setItem('jwt', data.jwt);
-            return data
+        console.log(data);
+        if(data.token) {
+            localStorage.setItem('jwt', data.token);
+            return data;
         } else {
             return;
         }

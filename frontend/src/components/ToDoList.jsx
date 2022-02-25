@@ -3,7 +3,6 @@ import ToDo from './ToDo';
 import Form from "./Form";
 
 export default function ToDoList({ toDos, handleClickDelete, handleClickComplete, handleClickChangeToDo, handleNewToDo }) {
-    
     return (
         <>
             <Form bntValue="Добавить" handleNewToDo={handleNewToDo} />

@@ -12,6 +12,7 @@ export default function SignIn ({ handleSignIn }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData({
+            ...data,
             [name]: value,
         });
     };

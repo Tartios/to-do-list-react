@@ -5,7 +5,7 @@ export default class Api {
     getToDo() {
         return fetch(`${this.url}/`, {
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
       
@@ -26,7 +26,7 @@ export default class Api {
         return fetch(`${this.url}/`, {
             method: 'POST',
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
         },
             body: JSON.stringify({
@@ -42,7 +42,7 @@ export default class Api {
         return fetch(`${this.url}/${toDo._id}`, {
             method: 'PUT',
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -60,7 +60,7 @@ export default class Api {
         return fetch(`${this.url}/completed/${toDo._id}`, {
             method: 'PUT',
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -75,7 +75,7 @@ export default class Api {
         return fetch(`${this.url}/${toDoId}`, {
             method: 'DELETE',
             headers: {
-                // authorization: `Bearer ${localStorage.getItem('jwt')}`,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({

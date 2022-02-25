@@ -8,8 +8,7 @@ export default function SignUp ({ handleSignUp }) {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;//было userName
-        console.log(e.target.name);
+        const { name, value } = e.target;
         setData({
             ...data,
             [name]: value,

@@ -33,7 +33,9 @@ const tokenCheck = () => {
     })
   }
 };
-
+useEffect(() => {
+  tokenCheck();
+}, []);
 
   // ========== USER ========== //
 
@@ -88,22 +90,23 @@ const tokenCheck = () => {
 
   // =============== AUTH ===============
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const handleSignIn = (userName, password) => {
     auth(userName, password)
     .then((data) => {
+      console.log(data);
       if (data.token) {
         localStorage.setItem("jwt", data.token);
         setUserData({
           userName: data.UserName,
           password: data.password,
         })
-        .catch(err => console.log(err));
         setLoggedIn(true);
         // history.push("/");
       }
     })
+    .catch(err => console.log(err));
   };
 
   // const history = useHistory();

@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+
 exports.createUser = (req, res) => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => User.create({
@@ -14,11 +15,11 @@ exports.createUser = (req, res) => {
 };
 
 exports.signIn = (req, res) => {
-    const { email, password } = req.body;
-    User.findUserByCredentials(email, password)
+    const { userName, password } = req.body;
+    User.findUserByCredentials(userName, password)
     .then((user) => {
         const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
-        res.send({ token });
+        res.send({ userName, password, token });
     })
     .catch(err => console.log(err));
 }
