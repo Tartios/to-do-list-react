@@ -9,12 +9,13 @@ import SignUp from './auth/Signup';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
 import { auth, getContent, register } from './auth/Auth';
-// import { UserContext } from './AppContext';
+import { ToDoContext } from './context/AppContext';
 
-const api = new Api('http://localhost:3000')
 
+const api = new Api('http://localhost:3000');
 function App() {
 
+const history = useHistory();
 
 const tokenCheck = () => {
   if(localStorage.getItem("jwt")) {
@@ -28,7 +29,7 @@ const tokenCheck = () => {
         }
         setUserData(userData);
         setLoggedIn(true);
-        // history.push("/");
+        history.push("/");
       }
     })
   }
@@ -95,7 +96,6 @@ useEffect(() => {
   const handleSignIn = (userName, password) => {
     auth(userName, password)
     .then((data) => {
-      console.log(data);
       if (data.token) {
         localStorage.setItem("jwt", data.token);
         setUserData({
@@ -103,13 +103,12 @@ useEffect(() => {
           password: data.password,
         })
         setLoggedIn(true);
-        // history.push("/");
+        history.push('/');
       }
     })
     .catch(err => console.log(err));
   };
 
-  // const history = useHistory();
   const handleSignUp = (userName, email, password) => {
     register(userName, email, password)
     .then((data) => {
@@ -120,18 +119,18 @@ useEffect(() => {
       })
       .catch(err => console.log(err));
       setLoggedIn(true);
-      // history.push("/");
+      history.push('/');
     })
   };
 
   const signOut = () => {
     localStorage.removeItem("jwt");
-    // history.push("/signin");
+    history.push('/signin');
   };
-
+  
   return (
     <div className="main">
-      {/* <UserContext.Provider value={userData}> */}
+      <ToDoContext.Provider value={toDos}>
       <Header />
       <Switch>
         <ProtectedRoute
@@ -159,15 +158,13 @@ useEffect(() => {
           <SignUp handleSignUp={handleSignUp} />
         </Route>
         <Route>
-          {/* <CompletedList toDos={completeList} handleClickDelete={handleClickDelete} /> */}
           {loggedIn ? <Redirect to="/completed" /> : <Redirect to="/signin" />}
         </Route>
         <Route>
-          {/* <ToDoList toDos={toDos} handleClickDelete={handleClickDelete} handleClickComplete={handleClickComplete} handleClickChangeToDo={handleClickChangeToDo} /> */}
           {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
         </Route>
       </Switch>
-      {/* </UserContext.Provider> */}
+      </ToDoContext.Provider>
     </div>
   );
 }

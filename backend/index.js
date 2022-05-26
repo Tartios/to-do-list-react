@@ -21,9 +21,9 @@ app.use(cors());
 //     next();
 // }
 // app.use(logger);
-app.post('/signup', createUser);
+// app.post('/signup', createUser);
 app.post('/signin', signIn);
-app.use(auth);
+// app.use(auth);
 app.use('/', router);
 app.listen(PORT, () => {
     console.log(`Listen ${PORT}`);

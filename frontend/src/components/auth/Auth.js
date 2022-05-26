@@ -16,7 +16,7 @@ export const register = (userName, email, password) => {
     })
     .then(res => res.json())//пропустил здесь одну фазу, не понял нафига она
     .then((data) => {
-        localStorage.setItem('token', data.token);//в место эта часть прописана в app.js 187 строка
+        localStorage.setItem('token', data.token);//в 'место' эта часть прописана в app.js 187 строка
     })
     .catch(err => console.log(err))
 };
@@ -35,7 +35,6 @@ export const auth = (userName, password) => {
     })
     .then(res => res.json())
     .then((data) => {
-        console.log(data);
         if(data.token) {
             localStorage.setItem('jwt', data.token);
             return data;

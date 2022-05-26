@@ -9,7 +9,7 @@ module.exports.getToDoList = (req, res) => {
 
 module.exports.createToDo = (req, res) => {
     const data = req.body;
-    toDoModel.create({ toDo: data.toDo, creator: req.user._id })
+    toDoModel.create({ toDo: data.toDo, creator: data.creator })
         .then((card) => {
             res.send(card);
     })

@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const ToDo = require('../models/to-do');
 const {
     getToDoList,
     createToDo,
@@ -16,16 +15,5 @@ router.put('/:id', patchToDo);
 router.put('/completed/:id', completeToDo)
 router.delete('/:id', deleteToDo);
 
-// const resik = (req, res) => {
-//     res.send(
-//         `<html>
-//         <body>
-//         <p>Привет!</p>
-//         </body>
-//         </html>`
-//     )
-// };
-
-// router.get('/', resik);
 
 module.exports = router;

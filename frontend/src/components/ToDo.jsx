@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState, memo } from 'react';
 import BtnDeleteToDo from './buttons/BtnDeleteToDo';
 import BtnCompleteToDo from './buttons/BtnCompleteToDo';
 import BtnEditToDo from './buttons/BtnEditToDo';
 import BtnEditToDoHandleSubmit from './buttons/BtnEditToDoHandleSubmit';
 
-export default function ToDo({id, value, toDo, handleClickDelete, handleClickComplete, handleClickChangeToDo}) {
+function ToDo({id, value, toDo, handleClickDelete, handleClickComplete, handleClickChangeToDo}) {
 
     const [inputValue, setInputValue] = useState(value);
 
@@ -82,3 +82,5 @@ export default function ToDo({id, value, toDo, handleClickDelete, handleClickCom
         </div>
     );
 }
+
+export const PureToDo = memo(ToDo, (props, newProps) => props.completed === newProps.completed);

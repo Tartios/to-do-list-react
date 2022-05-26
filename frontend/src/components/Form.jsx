@@ -15,12 +15,11 @@ export default function Form(props) {
     props.handleNewToDo(inputValue);
     setInputValue('');
   };
-  
     return (
         <form action='#' className='service'>
             <input type="text" onChange={handleInputValue} className="serviсe__input" value={inputValue} />
             {/* <button className="service__button" type="submit" onClick={handleSubmit} >{props.bntValue}</button> */}
-            <BtnCreateToDo handleSubmit={handleSubmit} bntValue={props.bntValue} />
+            <BtnCreateToDo handleSubmit={handleSubmit} btnValue={props.btnValue} />
         </form>
     )
 }
